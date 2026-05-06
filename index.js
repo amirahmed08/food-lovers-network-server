@@ -36,6 +36,8 @@ async function run(){
 
     const database = client.db("foodNetwork");
     const foodsCollection = database.collection('foods');
+    const usersCollection = database.collection('users');
+    const reviewsCollection = database.collection('reviews');
 
     //google signup user data post
     app.post('/users', async (req, res) => {
