@@ -37,6 +37,13 @@ async function run(){
     const database = client.db("foodNetwork");
     const foodsCollection = database.collection('foods');
 
+    //google signup user data post
+    app.post('/users', async (req, res) => {
+       const newUser = req.body;
+       const result = await usersCollection.insertOne(newUser);
+       res.send(result);
+    })
+
     // post all foods
     app.post('/foods', async (req, res) => {
         const newFood = req.body;
@@ -45,22 +52,25 @@ async function run(){
     });
 
     //get all foods
+
+    
+
     app.get('/foods', async (req, res) => {
       // const projectField = { name: 1, price_min: 1, price_max: 1, image: 1 };
       //   const cursor = foodsCollection.find().sort({price_min: 1}).skip(2).limit(6).project(projectField);
       
-        const cursor = foodsCollection.find()
+        const cursor = foodsCollection.find() 
         const result = await cursor.toArray();
         res.send(result);
     })
 
+    
+
+    //post review
+    
+
     // delete a food
-    app.delete('/foods/:id', async (req, res) => {
-        const id = req.params.id;
-        const query = { _id : new ObjectId (id) };
-        const result = await foodsCollection.deleteOne(query);
-        res.send(result); 
-    })
+   
 
 
     await client.db("admin").command({ ping : 1});
