@@ -55,7 +55,11 @@ async function run(){
 
     //get all foods
 
-    
+    app.get('/latest-foods', async (req, res) => {
+       const cursor = foodsCollection.find().sort({price_min: 1}).skip(2).limit(6);
+       const result = await cursor.toArray();
+       res.send(result);
+    })
 
     app.get('/foods', async (req, res) => {
       // const projectField = { name: 1, price_min: 1, price_max: 1, image: 1 };
