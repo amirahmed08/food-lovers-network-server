@@ -84,6 +84,12 @@ async function run(){
         res.send(result);
     })
 
+    app.get('/reviews', async (req, res) => {
+        const cursor = reviewsCollection.find();
+        const result = await cursor.toArray();
+        res.send(result);
+    })
+
     // delete a food
     app.delete('/foods/:id', async (req, res) => {
         const id = req.params.id;
